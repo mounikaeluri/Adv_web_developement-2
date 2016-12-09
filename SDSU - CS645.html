@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>SDSU - CS645</title>
+
+	<meta http-equiv="content-type" 
+		content="text/html;charset=utf-8" />
+<style type="text/css">
+h1, h2, h3 { text-align: center; }
+.centered { text-align: center; }
+</style>
+</head>
+
+
+<body>
+<h2>CS645 Spring 2015</h2>
+<h3>Advanced Web Application Development</h3>
+    <img src="http://pindar.sdsu.edu/images/red_bar.gif" 
+        height="4" width="100%"  alt="red line" />
+<h2>Programming Assignment #2</h2>
+<div class="centered">
+    <i>100 Points</i>   
+</div>
+<div>
+    <h3>Due Date/Time:</h3>
+    <p>
+    Your project is due on Thursday, March 19th 4:00 PM. Pacific Coast Time.
+    </p>
+    <h3>Entry Point:</h3>
+    <p>
+    The entry point for your project is a file called login.html.  This should go at the
+    top level in your <tt>web_services/</tt> folder. Thus, your all of your pages will be deliver 
+    by Tomcat, not Apache. The first page of your project (the login screen) will be 
+    displayed if the user directs the browser to: <tt>http://jadran.sdsu.edu/jadrnXXX/login.html</tt>
+    </p>
+    <h3>Java Web Services:</h3>
+    <p>
+    This assignment is an introduction to Java servlets and JSP (Java Server Pages).  You may not place 
+    any part of the project code in or below your public_html directory or the cgi-bin directory
+    for this project. 
+    [ NOTE:  you should leave all product images where they are.  The URL for product
+    images should be a location in your public_html/ directory tree, and they should stay there. ]     
+    You may not use anything other than Java servlets/JSP for dynamic server-side code in this assignment;  no 
+    Perl or PHP etc. 
+    </p>
+    <p>
+    For this assignment you will create a portion of an inventory application 
+    for your online retail site.  This portion is an application 
+    that will handle receipts of new merchandise and returns to vendor or sales of existing merchandise. 
+    More generally, merchandise RECEIVED INTO INVENTORY and merchandise REMOVED FROM INVENTORY.
+    The intention here is an application that warehouse staff might use the record movement
+    of inventory into and out of the warehouse.
+     
+    The application consists of the following:
+    </p>
+    <ul>
+        <li><b>A login screen</b>. &nbsp;&nbsp;The user must supply an authorized 
+        username/password pair to gain access to the system.</li>
+        <li><b>Inventory Received</b>. &nbsp;&nbsp;  This form should have the following
+        fields:  Date, SKU, Vendor, Category, Manufacturer's Identifier, Quantity. The date 
+        field should be pre-filled with today's date.  Once the user enters the SKU, all
+        remaining fields except the quantity should be filled in using AJAX.  The
+        record must be stored in the MySQL database on opatija.sdsu.edu.  You will need to 
+        create addional tables for this.  Only the Date, SKU, and quantity fields should be editable.</li>
+        <li><b>Inventory Sent Out</b>. &nbsp;&nbsp;  The specifications for this form are the same 
+        as for the Inventory Received form.  However, these records go into a different table.</li>
+        <li><b>Confirmation</b>. &nbsp;&nbsp;After submitting either an Inventory Received,
+        or Inventory Sent Out form, a confirmation should be displayed in the browser.</li>
+        <li><b>A logout link</b>. &nbsp;&nbsp;When this link is clicked, the user is logged out.</li>
+    </ul>
+    <h3>The Details:</h3> 
+    <p>
+    <b>The login screen</b><br />
+    Present the user with two fields, the <i>username</i> and <i>password</i>. The form 
+    will also have a <i>clear</i> and a <i>submit</i> button.  If the user enters a valid
+    username/password, the Menu page will load.  If the login is invalid, then 
+    the login screen should reappear, along with a helpful error message.
+    </p>
+    <p>Username/password pairs must be stored in the MySQL database on opatija.  The 
+    username should be stored in plain text, and the password <b>MUST</b> be stored in an 
+    encrypted form.  You may <b>not</b> use a text file on disk, nor may you hard code any
+    name or password in your Java source code.
+    You must have at least four valid username/password pairs, one of which <b>must</b> 
+    be:
+    </p>
+    <pre>
+        username:   cs645
+        password:   sp2015
+    </pre>
+    <p>
+    You should use POST as the parameter passing method.  Use Javascript to place the 
+    cursor on the username field when the page loads.  Simple things can mean a lot for 
+    useability.  The user should not have to grab the mouse and manually give focus 
+    to the username field.
+    </p>
+    <p>
+    <b>The Inventory Received/Sent Out Screens</b><br />
+    You must verify that the SKU entered matches a record in inventory.  You cannot receive
+    merchandise not ordered by the buyer, nor can you sent out things you don't have. 
+    Do not allow the form the be submitted
+    if the SKU is invalid.  Make sure that the quantity field is not zero or negative.
+    Be sure to use Javascript to put focus on the first field when the 
+page loads.  
+    </p>
+
+    <p>
+    <b>Database Tables</b><br />
+    You will need to create three new tables for this portion of the application.
+    <ul>
+    	<li><b>merchandise_in</b>  Merchandise received into the warehouse.  This 
+     	    table should include <b>sku, date, quantity</b> fields.</li>
+    	<li><b>merchandise_out</b>  Merchandise sent out from the warehouse.  This 
+     	    table should include <b>sku, date, quantity</b> fields.</li>
+    	<li><b>on_hand</b>  The on hand quantity for each item in inventory.  This 
+     	    table should include <b>sku, last_date_modified, on_hand_quantity</b> fields.
+	    </li>
+    </ul>
+
+    <h3>Project Submission</h3>
+    As with the previous assignment, for this project, you will create a zero-byte file named 'finished' 
+    in your web_services/ folder.
+
+
+        <h3>Grading:</h3>
+        <p>
+        Your grade will be determined based on four criteria: inclusion of 
+        the minimum specifications, validity of the xhtml and CSS code,  
+        use of Javascript/AJAX, and quality of the Java code.
+        </p>
+
+        <h3>Cheating:</h3> 
+        <p>
+        Just a reminder here.  Collaboration  is not permitted for this 
+        course. You are expected to complete all project assignments 
+        <b>on your own</b>. 
+        You must write all xhtml, css, Javascript and Perl code on your own.
+        You may use JQuery or any other Javascript library if you wish.
+        You may <b>not</b> use any code generation 
+        tools (Dreamweaver, Frontpage etc). Collaboration with anyone , or 
+        use of 
+        code generation tools is considered cheating.  If you adapt or copy 
+        code from the Internet, be sure to cite the source.  This should be 
+        limited to specific techniques.  Any student 
+        caught cheating on the projects or a midterm exam will receive an "F" in the 
+        course, and a report will be filed with the University.
+        </p>
+
+
+</div>
+
+
+</body></html>
